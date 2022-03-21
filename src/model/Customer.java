@@ -5,15 +5,14 @@ public class Customer {
 	private String address;
 	private int zipCode;
 	private String city;
-	private int phoneNumber;
+	private int phoneno;
 	
 	public Customer(String name, String address, int zipCode, String city, int phoneNumber) {
-		super();
 		this.name = name;
 		this.address = address;
 		this.zipCode = zipCode;
 		this.city = city;
-		this.phoneNumber = phoneNumber;
+		this.phoneno = phoneNumber;
 	}
 	
 	public String getName() {
@@ -41,10 +40,10 @@ public class Customer {
 		this.city = city;
 	}
 	public int getPhoneNumber() {
-		return phoneNumber;
+		return phoneno;
 	}
 	public void setPhoneNumber(int phoneNumber) {
-		this.phoneNumber = phoneNumber;
+		this.phoneno = phoneNumber;
 	}
 
 
