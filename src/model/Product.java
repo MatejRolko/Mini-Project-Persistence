@@ -1,24 +1,28 @@
 package model;
 
 public class Product {
+
 	private String name;
+	private String description;
 	private double purchasePrice;
 	private double salesPrice;
 	private double rentPrice;
-	private String countryOfOrigin;
+	private String country;
 	private int minStock;
-	
-	public Product(String name, double purchasePrice, double salesPrice
-			, double rentPrice, String countryOfOrigin,
-			int minStock) {
+	private int stock;
+
+	public Product(String name, String description, double purchasePrice, double salesPrice, double rentPrice, String country, int minStock,
+			int stock) {
 		this.name = name;
+		this.description = description;
 		this.purchasePrice = purchasePrice;
 		this.salesPrice = salesPrice;
 		this.rentPrice = rentPrice;
-		this.countryOfOrigin = countryOfOrigin;
+		this.country = country;
 		this.minStock = minStock;
+		this.stock = stock;
 	}
-	
+
 	public String getName() {
 		return name;
 	}
@@ -27,6 +31,14 @@ public class Product {
 		this.name = name;
 	}
 
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	
 	public double getPurchasePrice() {
 		return purchasePrice;
 	}
@@ -51,12 +63,12 @@ public class Product {
 		this.rentPrice = rentPrice;
 	}
 
-	public String getCountryOfOrigin() {
-		return countryOfOrigin;
+	public String getCountry() {
+		return country;
 	}
 
-	public void setCountryOfOrigin(String countryOfOrigin) {
-		this.countryOfOrigin = countryOfOrigin;
+	public void setCountry(String country) {
+		this.country = country;
 	}
 
 	public int getMinStock() {
@@ -67,7 +79,12 @@ public class Product {
 		this.minStock = minStock;
 	}
 
+	public int getStock() {
+		return stock;
+	}
 
-
+	public void setStock(int stock) {
+		this.stock = stock;
+	}
 
 }
