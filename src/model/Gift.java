@@ -5,8 +5,8 @@ public class Gift extends Product {
 	private String material;
 
 	public Gift(String name, String description, double purchasePrice, double salesPrice, double rentPrice, String countryOfOrigin,
-			int minStock, int stock, String material) {
-		super(name, description, purchasePrice, salesPrice, rentPrice, countryOfOrigin, minStock, stock);
+			int minStock, int stock, String material, int id) {
+		super(name, description, purchasePrice, salesPrice, rentPrice, countryOfOrigin, minStock, stock, id);
 		this.material = material;
 	}
 
