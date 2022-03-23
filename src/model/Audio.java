@@ -7,8 +7,8 @@ public class Audio extends Product {
 	private String author;
 
 	public Audio(String name, String description, double purchasePrice, double salesPrice, double rentPrice,
-			String country, int minStock, int stock, int noOfTracks, int lenght, String author) {
-		super(name, description, purchasePrice, salesPrice, rentPrice, country, minStock, stock);
+			String country, int minStock, int stock, int noOfTracks, int lenght, String author, int id) {
+		super(name, description, purchasePrice, salesPrice, rentPrice, country, minStock, stock, id);
 		this.noOfTracks = noOfTracks;
 		this.lenght = lenght;
 		this.author = author;

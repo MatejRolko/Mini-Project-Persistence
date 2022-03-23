@@ -7,8 +7,8 @@ public class Decoration extends Product {
 	private String size;
 
 	public Decoration(String name, String description, double purchasePrice, double salesPrice, double rentPrice,
-			String country, int minStock, int stock, String material, double weight, String size) {
-		super(name, description, purchasePrice, salesPrice, rentPrice, country, minStock, stock);
+			String country, int minStock, int stock, String material, double weight, String size, int id) {
+		super(name, description, purchasePrice, salesPrice, rentPrice, country, minStock, stock, id);
 		this.material = material;
 		this.weight = weight;
 		this.size = size;
