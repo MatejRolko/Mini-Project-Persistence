@@ -36,7 +36,6 @@ public class CustomerConcreteDAO implements CustomerDAO{
 		        boolean business = rs.getBoolean("business");
 				customers.add(new Customer(name, address, zipcode, city, phone, business));
 			}
-			return customers;
 		}
 		catch (SQLException e) {
 			System.out.println("error");

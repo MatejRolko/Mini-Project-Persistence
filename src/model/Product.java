@@ -1,9 +1,9 @@
 package model;
 
 public class Product {
-
+	
+	private int id;
 	private String name;
-	private String description;
 	private double purchasePrice;
 	private double salesPrice;
 	private double rentPrice;
@@ -11,16 +11,23 @@ public class Product {
 	private int minStock;
 	private int stock;
 
-	public Product(String name, String description, double purchasePrice, double salesPrice, double rentPrice, String country, int minStock,
+	public Product(String name, double purchasePrice, double salesPrice, double rentPrice, String country, int minStock,
 			int stock) {
 		this.name = name;
-		this.description = description;
 		this.purchasePrice = purchasePrice;
 		this.salesPrice = salesPrice;
 		this.rentPrice = rentPrice;
 		this.country = country;
 		this.minStock = minStock;
 		this.stock = stock;
+	}
+	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getName() {
@@ -29,14 +36,6 @@ public class Product {
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
 	}
 	
 	public double getPurchasePrice() {
