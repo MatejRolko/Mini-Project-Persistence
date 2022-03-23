@@ -60,33 +60,13 @@ public class ProductConcreteDAO implements ProductDAO {
 				String country = rs.getString("countryOfOrigin");
 				int minStock = rs.getInt("minStock");
 				int stock = rs.getInt("stock");
-				int id = rs.getInt("id");
+				int cid = rs.getInt("id");
 
-				result = new Product(name, null, purchasePrice, salesPrice, rentPrice, country, minStock, stock, id);
+				result = new Product(name, null, purchasePrice, salesPrice, rentPrice, country, minStock, stock, cid);
 			}
 		} catch (SQLException e) {
 
 		}
-
-		return result;
-		
-	    try (Connection con = Database.getConnection(); Statement stmt = con.createStatement()) {
-	      ResultSet rs = stmt.executeQuery(query);
-	      while (rs.next()) {
-	    	  String name = rs.getString("name");
-		      float purchasePrice = rs.getFloat("purchasePrice");
-		      float salesPrice = rs.getFloat("salesPrice");
-		      float rentPrice = rs.getFloat("rentPrice");
-		      String country = rs.getString("countryOfOrigin");
-		      int minStock = rs.getInt("minStock");
-		      int stock = rs.getInt("stock");
-		      int cid = rs.getInt("id");
-		        
-		      result = new Product(name, null, purchasePrice, salesPrice, rentPrice, country, minStock, stock, cid);
-	      }
-	    } catch (SQLException e) {
-	    	
-	    }
 	    
 	    return result;
 	}

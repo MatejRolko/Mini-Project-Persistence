@@ -48,7 +48,7 @@ public class CustomerController {
 	}
 
 	public boolean isBusiness(Customer customer) {
-		return customer.isBussiness();
+		return customer.isBusiness();
 	}
 
 }
