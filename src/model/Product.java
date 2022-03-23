@@ -24,13 +24,13 @@ public class Product {
 		this.minStock = minStock;
 		this.stock = stock;
 	}
-	
-	public void setId(int id) {
-		this.id = id;
-	}
-	
+
 	public int getId() {
 		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getName() {
@@ -39,7 +39,7 @@ public class Product {
 
 	public void setName(String name) {
 		this.name = name;
-	}	
+	}
 
 	public String getDescription() {
 		return description;
@@ -48,7 +48,7 @@ public class Product {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
+
 	public double getPurchasePrice() {
 		return purchasePrice;
 	}
