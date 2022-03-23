@@ -1,15 +1,31 @@
 package model;
 
-import java.awt.Color;
-
 public class Clothing extends Product {
 	private String size;
-	private Color color;
-	
+	private String color;
+
 	public Clothing(String name, double purchasePrice, double salesPrice, double rentPrice, String countryOfOrigin,
-			int minStock) {
+			int minStock, String size, String color) {
 		super(name, purchasePrice, salesPrice, rentPrice, countryOfOrigin, minStock);
-		// TODO Auto-generated constructor stub
+		this.size = size;
+		this.color = color;
+		
+	}
+
+	public String getSize() {
+		return size;
+	}
+
+	public String getColor() {
+		return color;
+	}
+
+	public void setSize(String size) {
+		this.size = size;
+	}
+
+	public void setColor(String color) {
+		this.color = color;
 	}
 
 }
