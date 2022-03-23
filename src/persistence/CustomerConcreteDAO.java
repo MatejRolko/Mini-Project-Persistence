@@ -11,6 +11,15 @@ import model.Customer;
 
 public class CustomerConcreteDAO implements CustomerDAO{
 
+	private static CustomerConcreteDAO instance = new CustomerConcreteDAO();
+	
+	private CustomerConcreteDAO() {
+	}
+
+	public static CustomerConcreteDAO getInstance() {
+		return instance;
+	}
+	
 	@Override
 	public ArrayList<Customer> read() {
 		ArrayList<Customer> customers = new ArrayList<Customer>();
@@ -70,7 +79,7 @@ public class CustomerConcreteDAO implements CustomerDAO{
 			ps.setInt(3, customer.getZipCode());
 			ps.setString(4, customer.getCity());
 			ps.setInt(5, customer.getPhoneNumber());
-			ps.setBoolean(6, customer.isBussiness());
+			ps.setBoolean(6, customer.isBusiness());
 		}
 		catch (SQLException e) {
 			System.out.println("error");
@@ -88,7 +97,7 @@ public class CustomerConcreteDAO implements CustomerDAO{
 			ps.setInt(3, customer.getZipCode());
 			ps.setString(4, customer.getCity());
 			ps.setInt(5, customer.getPhoneNumber());
-			ps.setBoolean(6, customer.isBussiness());
+			ps.setBoolean(6, customer.isBusiness());
 			ps.setInt(7, customer.getId());
 		}
 		catch (SQLException e) {
