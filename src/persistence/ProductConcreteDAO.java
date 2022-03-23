@@ -28,7 +28,7 @@ public class ProductConcreteDAO implements ProductDAO{
 		        int minStock = rs.getInt("minStock");
 		        int stock = rs.getInt("stock");
 		        
-				products.add(new Product(name, purchasePrice, salesPrice, rentPrice, country, minStock, stock));
+				products.add(new Product(name, null, purchasePrice, salesPrice, rentPrice, country, minStock, stock));
 			}
 			
 		}
@@ -55,7 +55,7 @@ public class ProductConcreteDAO implements ProductDAO{
 		      int minStock = rs.getInt("minStock");
 		      int stock = rs.getInt("stock");
 		        
-		      result = new Product(name, purchasePrice, salesPrice, rentPrice, country, minStock, stock);
+		      result = new Product(name, null, purchasePrice, salesPrice, rentPrice, country, minStock, stock);
 	      }
 	    } catch (SQLException e) {
 	    	

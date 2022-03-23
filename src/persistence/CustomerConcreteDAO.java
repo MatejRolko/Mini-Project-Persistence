@@ -78,7 +78,7 @@ public class CustomerConcreteDAO implements CustomerDAO{
 			ps.setInt(3, customer.getZipCode());
 			ps.setString(4, customer.getCity());
 			ps.setInt(5, customer.getPhoneNumber());
-			ps.setBoolean(6, customer.isBusiness());
+			ps.setBoolean(6, customer.isBussiness());
 		}
 		catch (SQLException e) {
 			System.out.println("error");
@@ -96,7 +96,7 @@ public class CustomerConcreteDAO implements CustomerDAO{
 			ps.setInt(3, customer.getZipCode());
 			ps.setString(4, customer.getCity());
 			ps.setInt(5, customer.getPhoneNumber());
-			ps.setBoolean(6, customer.isBusiness());
+			ps.setBoolean(6, customer.isBussiness());
 			ps.setInt(7, customer.getId());
 		}
 		catch (SQLException e) {
