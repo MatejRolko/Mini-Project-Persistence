@@ -12,8 +12,8 @@ public class Product {
 	private int minStock;
 	private int stock;
 
-	public Product(String name, String description, double purchasePrice, double salesPrice, double rentPrice, String country, int minStock,
-			int stock) {
+	public Product(String name, String description, double purchasePrice, double salesPrice, double rentPrice,
+			String country, int minStock, int stock) {
 		this.name = name;
 		this.description = description;
 		this.purchasePrice = purchasePrice;
@@ -23,17 +23,14 @@ public class Product {
 		this.minStock = minStock;
 		this.stock = stock;
 	}
-	
 
 	public int getId() {
 		return id;
 	}
 
-
 	public void setId(int id) {
 		this.id = id;
 	}
-
 
 	public String getName() {
 		return name;
@@ -41,7 +38,7 @@ public class Product {
 
 	public void setName(String name) {
 		this.name = name;
-	}	
+	}
 
 	public String getDescription() {
 		return description;
@@ -50,7 +47,7 @@ public class Product {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
+
 	public double getPurchasePrice() {
 		return purchasePrice;
 	}

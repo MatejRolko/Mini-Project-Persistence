@@ -11,7 +11,7 @@ public class Equipment extends Product {
 	}
 
 	public String getType() {
-		return type;
+		return type; 
 	}
 
 	public void setType(String type) {
