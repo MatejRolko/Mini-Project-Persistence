@@ -1,20 +1,33 @@
 package model;
 
 public class Customer {
+	
+	private int id;
 	private String name;
 	private String address;
 	private int zipCode;
 	private String city;
 	private int phoneno;
+	private boolean isBussiness;
 	
-	public Customer(String name, String address, int zipCode, String city, int phoneNumber) {
+	
+	public Customer(String name, String address, int zipCode, String city, int phoneNumber, boolean isBussiness) {
 		this.name = name;
 		this.address = address;
 		this.zipCode = zipCode;
 		this.city = city;
 		this.phoneno = phoneNumber;
+		this.isBussiness = isBussiness;
 	}
 	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
 	public String getName() {
 		return name;
 	}
@@ -46,6 +59,12 @@ public class Customer {
 		this.phoneno = phoneNumber;
 	}
 
+	public boolean isBussiness() {
+		return isBussiness;
+	}
 
+	public void setBussiness(boolean isBussiness) {
+		this.isBussiness = isBussiness;
+	}
 	
 }
