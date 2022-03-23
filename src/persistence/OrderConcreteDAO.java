@@ -4,6 +4,7 @@ import java.beans.Statement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -37,9 +38,10 @@ public class OrderConcreteDAO implements OrderDAO {
 				String deliveryStatus = rs.getString("deliveryStatus");
 				String delivery = rs.getString("delivery");
 				int customerId = rs.getInt("customer_id");
-				
-				Order order = new Order(id);
+				list.add(new Order(id, date, price, deliveryDate, deliveryStatus,
+						delivery,customerId));
 				}
+			return list;
 		}
 		catch(Exception e) {
 			e.printStackTrace();
@@ -49,7 +51,27 @@ public class OrderConcreteDAO implements OrderDAO {
 
 	@Override
 	public Order read(int id) {
-		// TODO Auto-generated method stub
+		Order order = null;
+		try(Connection con = Database.getConnection()){
+			PreparedStatement ps = (PreparedStatement) con.createStatement();
+			ResultSet rs = ps.executeQuery("use CSC-CSD-S212_10407574"
+					+" select * from dbo.saleOrder where id = ?");
+			ps.setInt(1, id);
+			while(rs.next()) {
+				Date date = rs.getTimestamp("date");
+				int price = rs.getInt("amount");
+				Date deliveryDate = rs.getTimestamp("deliveryDate");
+				String deliveryStatus = rs.getString("deliveryStatus");
+				String delivery = rs.getString("delivery");
+				int customerId = rs.getInt("customer_id");
+				return new Order(id, date, price, deliveryDate, deliveryStatus,
+						delivery,customerId);
+				}
+			
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
 		return null;
 	}
 
@@ -73,18 +95,40 @@ public class OrderConcreteDAO implements OrderDAO {
 		}
 		
 	}
-	
-	
 
 	@Override
-	public void update(Order order) {
-		// TODO Auto-generated method stub
+	public void update(Order order, int id) {
+		try (Connection con = Database.getConnection()){
+			PreparedStatement ps = con.prepareStatement("USE CSC-CSD-S212_10407574  "
+					+ "update dbo.saleOrder SET date=?, SET amount=?, SET deliveryDate=?, "
+					+ "SET deliveryStatus=?, SET delivery=?, SET customer_id=?"
+					+ "WHERE id=?");
+			ps.setTimestamp(1, order.getSqlDate());
+			ps.setDouble(2,order.getPrice());
+			ps.setTimestamp(3, order.getSqlDeliveryDate());
+			ps.setString(4, order.getDeliveryStatus());
+			ps.setString(5, order.getDelivery());
+			ps.setInt(6,order.getCustomerId());
+			ps.setInt(7, id);
+			ps.execute();
+		}
+		catch (SQLException e) {
+			System.out.println("error");
+		}
 		
 	}
 
 	@Override
-	public void delete(Order order) {
-		// TODO Auto-generated method stub
+	public void delete(int id) {
+		try(Connection con = Database.getConnection()){
+			PreparedStatement ps = con.prepareStatement("use CSC-CSD-S212_10407574 "
+					+ " delete from dbo.saleOrder where id = ?");
+			ps.setInt(1, id);
+			ps.execute();
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
 		
 	}
 
@@ -100,13 +144,10 @@ public class OrderConcreteDAO implements OrderDAO {
 				ps.setInt(3, order.getId());
 				ps.execute();
 			}
-			
 		}
 		catch(Exception e) {
 			e.printStackTrace();
-		
 		}
-		
 	}
 
 	@Override

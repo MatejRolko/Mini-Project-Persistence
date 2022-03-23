@@ -1,4 +1,4 @@
-package controll;
+package controller;
 
 import model.Order;
 import persistence.OrderConcreteDAO;
