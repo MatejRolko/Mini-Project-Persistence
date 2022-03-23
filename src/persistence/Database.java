@@ -1,4 +1,4 @@
-package data_acces;
+package persistence;
 
 import java.sql.Connection;
 
