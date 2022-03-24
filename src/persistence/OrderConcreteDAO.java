@@ -94,7 +94,23 @@ public class OrderConcreteDAO implements OrderDAO {
 		catch(Exception e) {
 			e.printStackTrace();
 		}
-		
+	}
+	
+	@Override
+	public void setItems(Order order) {
+		try(Connection con = Database.getInstance().getConnection();){
+			for(SalesLineItem i:order.getProducts()) {
+				PreparedStatement ps = con.prepareStatement("insert into dbo.saleItems(amount, product_id) values("
+						+ "?,?) where saleOrder_id = ? ");
+				ps.setInt(1, i.getAmount());
+				ps.setInt(2, i.getProduct().getId());
+				ps.setInt(3, order.getId());
+				ps.execute();
+			}
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
@@ -129,23 +145,6 @@ public class OrderConcreteDAO implements OrderDAO {
 			e.printStackTrace();
 		}
 		
-	}
-
-	@Override
-	public void setItems(Order order) {
-		try(Connection con = Database.getInstance().getConnection();){
-			for(SalesLineItem i:order.getProducts()) {
-				PreparedStatement ps = con.prepareStatement("insert into dbo.saleItems(amount, product_id) values("
-						+ "?,?) where saleOrder_id = ? ");
-				ps.setInt(1, i.getAmount());
-				ps.setInt(2, i.getProduct().getId());
-				ps.setInt(3, order.getId());
-				ps.execute();
-			}
-		}
-		catch(Exception e) {
-			e.printStackTrace();
-		}
 	}
 
 	@Override
