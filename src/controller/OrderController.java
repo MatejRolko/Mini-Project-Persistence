@@ -95,4 +95,8 @@ public class OrderController {
 	public Order findById(int id) {
 		return ocd.read(id);
 	}
+	
+	public void saveOrder() {
+		ocd.create(order);
+	}
 }
