@@ -7,7 +7,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import model.Customer;
 import model.Product;
 
 public class ProductConcreteDAO implements ProductDAO {
@@ -35,23 +34,21 @@ public class ProductConcreteDAO implements ProductDAO {
 				int stock = rs.getInt("stock");
 				int id = rs.getInt("id");
 
-				products.add(new Product(name, null, purchasePrice, salesPrice, rentPrice, country, minStock, stock, id));
-
+				products.add(
+						new Product(name, null, purchasePrice, salesPrice, rentPrice, country, minStock, stock, id));
 			}
 
 		} catch (SQLException e) {
 			System.out.println("error");
 		}
-
 		return products;
 	}
 
 	@Override
 	public Product read(int id) {
-		String query = "SELECT * FROM dbo.product";
-		Product result = null;
-		try (Connection con = Database.getInstance().getConnection(); Statement stmt = con.createStatement()) {
-			ResultSet rs = stmt.executeQuery(query);
+		try (Connection con = Database.getInstance().getConnection()) {
+			Statement statement = con.createStatement();
+			ResultSet rs = statement.executeQuery("SELECT * FROM dbo.product");
 			while (rs.next()) {
 				String name = rs.getString("name");
 				float purchasePrice = rs.getFloat("purchasePrice");
@@ -62,20 +59,20 @@ public class ProductConcreteDAO implements ProductDAO {
 				int stock = rs.getInt("stock");
 				int cid = rs.getInt("id");
 
-				result = new Product(name, null, purchasePrice, salesPrice, rentPrice, country, minStock, stock, cid);
+				return new Product(name, null, purchasePrice, salesPrice, rentPrice, country, minStock, stock, cid);
 			}
 		} catch (SQLException e) {
-
+			e.printStackTrace();
 		}
-	    
-	    return result;
+		return null;
 	}
 
 	@Override
 	public void create(Product product) {
 		try (Connection con = Database.getInstance().getConnection()) {
-			PreparedStatement ps = con.prepareStatement( "INSERT INTO dbo.product (name, purchasePrice, salesPrice, rentPrice, countryOfOrigin, minStock, stock)"
-					+ "VALUES (?,?,?,?,?,?,?)");
+			PreparedStatement ps = con.prepareStatement(
+					"INSERT INTO dbo.product (name, purchasePrice, salesPrice, rentPrice, countryOfOrigin, minStock, stock)"
+							+ "VALUES (?,?,?,?,?,?,?)");
 			ps.setString(1, product.getName());
 			ps.setDouble(2, product.getPurchasePrice());
 			ps.setDouble(3, product.getSalesPrice());
@@ -83,10 +80,10 @@ public class ProductConcreteDAO implements ProductDAO {
 			ps.setString(5, product.getCountry());
 			ps.setInt(6, product.getMinStock());
 			ps.setInt(7, product.getStock());
+			ps.execute();
 		} catch (SQLException e) {
 			System.out.println("error");
 		}
-
 	}
 
 	@Override
@@ -103,23 +100,21 @@ public class ProductConcreteDAO implements ProductDAO {
 			ps.setInt(6, product.getMinStock());
 			ps.setInt(7, product.getStock());
 			ps.setInt(8, product.getId());
+			ps.execute();
 		} catch (SQLException e) {
 			System.out.println("error");
 		}
-
 	}
 
 	@Override
 	public void delete(Product product) {
-
 		try (Connection con = Database.getInstance().getConnection()) {
 			PreparedStatement ps = con
 					.prepareStatement("USE CSD-CSC-S212_10407570 " + "DELETE FROM dbo.product WHERE id=?");
 			ps.setInt(1, product.getId());
+			ps.execute();
 		} catch (SQLException e) {
 			System.out.println("error");
 		}
-
 	}
-
 }
