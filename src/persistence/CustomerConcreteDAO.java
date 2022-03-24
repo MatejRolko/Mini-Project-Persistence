@@ -68,7 +68,7 @@ public class CustomerConcreteDAO implements CustomerDAO {
 	public void create(Customer customer) {
 		try (Connection con = Database.getInstance().getConnection()) {
 			PreparedStatement ps = con.prepareStatement("USE CSD-CSC-S212_10407570 "
-					+ "INSERT INTO dbo.customer (name, address, zipcode, city, phone, busines)"
+					+ "INSERT INTO dbo.customer (name, address, zipcode, city, phone, business)"
 					+ "VALUES (?,?,?,?,?,?)");
 			ps.setString(1, customer.getName());
 			ps.setString(2, customer.getAddress());
