@@ -30,7 +30,8 @@ public class OrderConcreteDAO implements OrderDAO {
 		ArrayList<Order> list = new ArrayList<Order>();
 		try(Connection con = Database.getInstance().getConnection();){
 			java.sql.Statement statement = con.createStatement();
-			ResultSet rs = statement.executeQuery("use CSC-CSD-S212_10407574"
+		//	use CSC-CSD-S212_10407574
+			ResultSet rs = statement.executeQuery(""
 					+ " select * from dbo.saleOrder"); 
 			while(rs.next()) {
 				int id = rs.getInt("id");
@@ -56,8 +57,7 @@ public class OrderConcreteDAO implements OrderDAO {
 		Order order = null;
 		try(Connection con = Database.getInstance().getConnection();){
 			PreparedStatement ps = (PreparedStatement) con.createStatement();
-			ResultSet rs = ps.executeQuery("use CSC-CSD-S212_10407574"
-					+" select * from dbo.saleOrder where id = ?");
+			ResultSet rs = ps.executeQuery(" select * from dbo.saleOrder where id = ?");
 			ps.setInt(1, id);
 			while(rs.next()) {
 				Date date = rs.getTimestamp("date");
@@ -80,8 +80,7 @@ public class OrderConcreteDAO implements OrderDAO {
 	@Override
 	public void create(Order order) {
 		try(Connection con = Database.getInstance().getConnection();){
-			PreparedStatement ps = con.prepareStatement("use CSC-CSD-S212_10407574 "
-					+ " insert into dbo.saleOrder(date, amount, deliveryDate, deliveryStatus"
+			PreparedStatement ps = con.prepareStatement(" insert into dbo.saleOrder(date, amount, deliveryDate, deliveryStatus"
 					+ " delivery, customer_id) values (?,?,?,?,?,?) ");
 			ps.setTimestamp(1, order.getSqlDate());
 			ps.setDouble(2,order.getPrice());
@@ -101,8 +100,7 @@ public class OrderConcreteDAO implements OrderDAO {
 	@Override
 	public void update(Order order, int id) {
 		try (Connection con = Database.getInstance().getConnection();){
-			PreparedStatement ps = con.prepareStatement("USE CSC-CSD-S212_10407574  "
-					+ "update dbo.saleOrder SET date=?, SET amount=?, SET deliveryDate=?, "
+			PreparedStatement ps = con.prepareStatement("update dbo.saleOrder SET date=?, SET amount=?, SET deliveryDate=?, "
 					+ "SET deliveryStatus=?, SET delivery=?, SET customer_id=?"
 					+ "WHERE id=?");
 			ps.setTimestamp(1, order.getSqlDate());
@@ -123,8 +121,7 @@ public class OrderConcreteDAO implements OrderDAO {
 	@Override
 	public void delete(int id) {
 		try(Connection con = Database.getInstance().getConnection();){
-			PreparedStatement ps = con.prepareStatement("use CSC-CSD-S212_10407574 "
-					+ " delete from dbo.saleOrder where id = ?");
+			PreparedStatement ps = con.prepareStatement( " delete from dbo.saleOrder where id = ?");
 			ps.setInt(1, id);
 			ps.execute();
 		}
@@ -138,8 +135,7 @@ public class OrderConcreteDAO implements OrderDAO {
 	public void setItems(Order order) {
 		try(Connection con = Database.getInstance().getConnection();){
 			for(SalesLineItem i:order.getProducts()) {
-				PreparedStatement ps = con.prepareStatement("use CSC-CSD-S212_10407574 "
-						+ "insert into dbo.saleItems(amount, product_id) values("
+				PreparedStatement ps = con.prepareStatement("insert into dbo.saleItems(amount, product_id) values("
 						+ "?,?) where saleOrder_id = ? ");
 				ps.setInt(1, i.getAmount());
 				ps.setInt(2, i.getProduct().getId());
@@ -157,13 +153,14 @@ public class OrderConcreteDAO implements OrderDAO {
 		Integer id = null;
 		try(Connection con = Database.getInstance().getConnection();){
 			java.sql.Statement statement = con.createStatement();
-			ResultSet rs = statement.executeQuery("use CSC-CSD-S212_10407574"
-					+ " SELECT TOP 1 id FROM dbo.saleOrder "
+			ResultSet rs = statement.executeQuery(" SELECT TOP 1 id FROM dbo.saleOrder "
 					+ "ORDER BY id DESC ");
+
 			while(rs.next()) {
-				id = rs.getInt("id") +1;
+				id = rs.getInt("id");
 				}
-			return id;
+			if(id != null) return id +1;
+			else return 1;
 		}
 		catch(Exception e) {
 			e.printStackTrace();

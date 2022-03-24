@@ -83,4 +83,12 @@ public class OrderController {
 	public void setDeliveryStatus(String deliveryOption) {
 		order.setDeliveryStatus(deliveryOption);
 	}
+	
+	public int getNextOrderId() {
+		return ocd.getNextOrderId();
+	}
+	
+	public ArrayList<Order> read(){
+		return ocd.read();
+	}
 }

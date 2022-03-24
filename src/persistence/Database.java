@@ -7,6 +7,7 @@ import java.sql.SQLException;
 
 import com.microsoft.sqlserver.jdbc.SQLServerDataSource;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
+import com.microsoft.sqlserver.jdbc.SQLServerDriver;
 
 	public class Database {   
 		

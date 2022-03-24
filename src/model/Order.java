@@ -57,6 +57,8 @@ public class Order {
 
 	public int getId() {
 		return id;
+		
+		
 	}
 
 	public double getPrice() {
