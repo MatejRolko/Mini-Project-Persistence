@@ -16,6 +16,14 @@ public class OrderController {
 		ocd = OrderConcreteDAO.getInstance();
 	}
 	
+	public void completeOrder() {
+		ocd.create(order);
+	}
+	
+	public Order getOrder() {
+		return order;
+	}
+	
 	public void createNewOrder() {
 		order = new Order(ocd.getNextOrderId());
 	}
