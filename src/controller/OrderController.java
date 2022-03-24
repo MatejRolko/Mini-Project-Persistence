@@ -95,8 +95,13 @@ public class OrderController {
 	public Order findById(int id) {
 		return ocd.read(id);
 	}
-	
+
 	public void saveOrder() {
+		double price = 0;
+		for (SalesLineItem item : this.getProducts()) {
+			price += item.getProduct().getSalesPrice() * item.getAmount();
+		}
+		order.setPrice(price);
 		ocd.create(order);
 	}
 }
