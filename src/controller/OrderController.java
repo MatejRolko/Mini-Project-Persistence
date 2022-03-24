@@ -24,8 +24,9 @@ public class OrderController {
 		return order.getCustomerId();
 	}
 
-	public void addSalesLineItem(SalesLineItem item) {
+	public void enterSalesLineItem(SalesLineItem item) {
 		order.addSalesLineItem(item);
+		setPrice(getPrice() + item.getAmount() * item.getProduct().getSalesPrice());
 	}
 
 	public void setCustomerId(int id) {
@@ -97,11 +98,6 @@ public class OrderController {
 	}
 
 	public void saveOrder() {
-		double price = 0;
-		for (SalesLineItem item : this.getProducts()) {
-			price += item.getProduct().getSalesPrice() * item.getAmount();
-		}
-		order.setPrice(price);
 		ocd.create(order);
 	}
 }
