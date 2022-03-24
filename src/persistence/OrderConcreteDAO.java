@@ -54,7 +54,6 @@ public class OrderConcreteDAO implements OrderDAO {
 
 	@Override
 	public Order read(int id) {
-		Order order = null;
 		try(Connection con = Database.getInstance().getConnection();){
 			PreparedStatement ps = (PreparedStatement) con.createStatement();
 			ResultSet rs = ps.executeQuery(" select * from dbo.saleOrder where id = ?");
