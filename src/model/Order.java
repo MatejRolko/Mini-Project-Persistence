@@ -22,9 +22,9 @@ public class Order {
 		this.date = Calendar.getInstance().getTime();
 		this.deliveryDate = Calendar.getInstance().getTime();
 	}
-	
-	public Order(int id, Date date, double price, Date deliveryDate,
-			String deliveryStatus, String delivery, int customer_id) {
+
+	public Order(int id, Date date, double price, Date deliveryDate, String deliveryStatus, String delivery,
+			int customer_id) {
 		this.id = id;
 		this.date = date;
 		this.price = price;
@@ -32,33 +32,30 @@ public class Order {
 		this.deliveryStatus = deliveryStatus;
 		this.delivery = delivery;
 		this.customerId = customer_id;
-		
 	}
-	
+
 	public int getCustomerId() {
 		return customerId;
 	}
-	
+
 	public void addSalesLineItem(SalesLineItem item) {
 		products.add(item);
 	}
-	
+
 	public void setCustomerId(int id) {
 		customerId = id;
 	}
-	
+
 	public void setDelivery(String state) {
 		delivery = state;
 	}
-	
+
 	public String getDelivery() {
 		return delivery;
 	}
 
 	public int getId() {
 		return id;
-		
-		
 	}
 
 	public double getPrice() {
@@ -68,17 +65,17 @@ public class Order {
 	public Date getDate() {
 		return date;
 	}
-	
+
 	public Date getDeliveryDate() {
 		return deliveryDate;
 	}
-	
+
 	public Timestamp getSqlDate() {
 		java.util.Date dateTime = this.getDate();
 		java.sql.Timestamp sqlTime = new java.sql.Timestamp(dateTime.getTime());
 		return sqlTime;
 	}
-	
+
 	public Timestamp getSqlDeliveryDate() {
 		java.util.Date dateTime = this.getDeliveryDate();
 		java.sql.Timestamp sqlTime = new java.sql.Timestamp(dateTime.getTime());
