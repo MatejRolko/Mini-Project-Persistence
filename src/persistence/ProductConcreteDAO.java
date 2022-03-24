@@ -74,8 +74,7 @@ public class ProductConcreteDAO implements ProductDAO {
 	@Override
 	public void create(Product product) {
 		try (Connection con = Database.getInstance().getConnection()) {
-			PreparedStatement ps = con.prepareStatement("USE CSD-CSC-S212_10407570 "
-					+ "INSERT INTO dbo.product (name, purchasePrice, salesPrice, rentPrice, countryOfOrigin, minStock, stock)"
+			PreparedStatement ps = con.prepareStatement( "INSERT INTO dbo.product (name, purchasePrice, salesPrice, rentPrice, countryOfOrigin, minStock, stock)"
 					+ "VALUES (?,?,?,?,?,?,?)");
 			ps.setString(1, product.getName());
 			ps.setDouble(2, product.getPurchasePrice());

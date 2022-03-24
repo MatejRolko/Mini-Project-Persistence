@@ -104,7 +104,7 @@ public class OrderConcreteDAO implements OrderDAO {
 						+ "?,?) where saleOrder_id = ? ");
 				ps.setInt(1, i.getAmount());
 				ps.setInt(2, i.getProduct().getId());
-				ps.setInt(3, order.getId());
+				ps.setInt(3, order.getId());  
 				ps.execute();
 			}
 		}
