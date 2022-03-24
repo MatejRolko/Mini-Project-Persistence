@@ -99,11 +99,6 @@ public class Order {
 		this.price = price;
 	}
 
-	/*public void setDate(String date) {
-		this.date = date;
-	}*/
-
-
 	public void setDeliveryStatus(String deliveryOption) {
 		this.deliveryStatus = deliveryOption;
 	}
