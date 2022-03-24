@@ -60,9 +60,7 @@ public class CustomerConcreteDAO implements CustomerDAO{
 	        result = new Customer(name, address, zipcode, city, phone, business);
 	      }
 	    } catch (SQLException e) {
-	    	
 	    }
-	    
 	    return result;
 	}
 
@@ -114,6 +112,4 @@ public class CustomerConcreteDAO implements CustomerDAO{
 			System.out.println("error");
 		}
 	}
-	
-	
 }

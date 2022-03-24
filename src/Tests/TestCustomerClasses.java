@@ -19,7 +19,7 @@ class TestCustomerClasses {
         int zipcode = 9200;
         String city = "Aalborg";
         int phone = 1234456;
-        boolean business = false;
+        boolean business = false; 
         
         Customer testCustomer = new Customer(name, address, zipcode, city, phone, business);
 		

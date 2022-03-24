@@ -14,9 +14,7 @@ import model.SalesLineItem;
 public class OrderConcreteDAO implements OrderDAO {
 	private static OrderConcreteDAO instance;
 
-	
 	private OrderConcreteDAO() {
-
 	}
 	
 	public static OrderConcreteDAO getInstance() {
@@ -68,7 +66,6 @@ public class OrderConcreteDAO implements OrderDAO {
 				return new Order(id, date, price, deliveryDate, deliveryStatus,
 						delivery,customerId);
 				}
-			
 		}
 		catch(Exception e) {
 			e.printStackTrace();
@@ -104,11 +101,11 @@ public class OrderConcreteDAO implements OrderDAO {
 				ps.setInt(1, i.getAmount());
 				ps.setInt(2, i.getProduct().getId());
 				ps.setInt(3, order.getId());  
-				ps.execute();
+				ps.execute(); 
 			}
 		}
 		catch(Exception e) {
-			e.printStackTrace();
+			e.printStackTrace(); 
 		}
 	}
 

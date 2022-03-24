@@ -97,11 +97,11 @@ public class OrderController {
 	}
 
 	public void saveOrder() {
-		double price = 0;
+		double price = 0; 
 		for (SalesLineItem item : this.getProducts()) {
 			price += item.getProduct().getSalesPrice() * item.getAmount();
 		}
 		order.setPrice(price);
-		ocd.create(order);
+		ocd.create(order); 
 	}
 }
