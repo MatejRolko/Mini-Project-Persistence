@@ -18,16 +18,16 @@ public class Order {
 
 	public Order(int id) {
 		this.id = id;
-		ArrayList<SalesLineItem> products = new ArrayList<SalesLineItem>();
+		products = new ArrayList<SalesLineItem>();
 		this.date = Calendar.getInstance().getTime();
 		this.deliveryDate = Calendar.getInstance().getTime();
 	}
 	
-	public Order(int id, Date date, int amount, Date deliveryDate,
+	public Order(int id, Date date, double price, Date deliveryDate,
 			String deliveryStatus, String delivery, int customer_id) {
 		this.id = id;
 		this.date = date;
-		this.price = amount;
+		this.price = price;
 		this.deliveryDate = deliveryDate;
 		this.deliveryStatus = deliveryStatus;
 		this.delivery = delivery;
