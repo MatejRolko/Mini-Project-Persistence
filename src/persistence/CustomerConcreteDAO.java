@@ -25,7 +25,7 @@ public class CustomerConcreteDAO implements CustomerDAO {
 		ArrayList<Customer> customers = new ArrayList<Customer>();
 
 		try (Connection con = Database.getInstance().getConnection()) {
-			Statement statement = con.createStatement();
+			PreparedStatement statement = (PreparedStatement) con.createStatement();
 			ResultSet rs = statement.executeQuery("SELECT * FROM dbo.customer");
 			while (rs.next()) {
 				String name = rs.getString("name");
