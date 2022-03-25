@@ -14,14 +14,16 @@ public class OrderController {
 	
 	public Order getOrderById(int id) {
 		return ocd.read(id);
-	}
+	}  
 
 	public OrderController() {
-		ocd = OrderConcreteDAO.getInstance();
+		ocd = OrderConcreteDAO.getInstance();  
 	}
 
 	public void createNewOrder() {
-		order = new Order(ocd.getNextOrderId());
+		int id = ocd.getNextOrderId();
+		System.out.println(id);
+		order = new Order(id);
 	}
 
 	public int getCustomerId() {
@@ -109,8 +111,5 @@ public class OrderController {
 		}
 		order.setPrice(price);
 		ocd.create(order); 
-
-		ocd.create(order);
-
 	}
 }

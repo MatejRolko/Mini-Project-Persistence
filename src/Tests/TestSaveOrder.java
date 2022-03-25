@@ -14,28 +14,25 @@ import controller.ProductController;
 import model.Product;
 import model.SalesLineItem;
 
-class TestCreateOrder {
-	
-	@Before public static Product getProduct() {
-		ProductController cntrl = new ProductController();
-		CustomerController ccntrl = new CustomerController();
-		return cntrl.findProductByName("greg");
-	} 
+class TestSaveOrder {
 
-	@Test public void testOrderId() {
+	@Test public void testSaveOrder() {
+		
+	//Arrange
 	OrderController cntrl = new OrderController();
+	ProductController pcntrl = new ProductController();
+	int sizeBefore = cntrl.getAllOrders().size();
+
+	
+	//Assert
 	cntrl.createNewOrder();
-	cntrl.enterSalesLineItem(new SalesLineItem(getProduct(),20));
+	cntrl.enterSalesLineItem(new SalesLineItem(pcntrl.findProductByName("greg"),20));
 	cntrl.setCustomerId(1);
 	cntrl.setDelivery(null);
 	cntrl.saveOrder();
 	
-	//assertNotNull(cntrl.getOrder()); 
+	//Act
+	assertEquals(sizeBefore, cntrl.getAllOrders().size() -1);
+	}
 
-	}
-	
-	@After
-	public void after() {
-		
-	}
 }

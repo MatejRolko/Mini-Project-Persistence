@@ -15,10 +15,10 @@ public class TestGetCustomerById {
 		//Arrange
 		CustomerController cntrl = new CustomerController();
 		
-		//Act
+		//Assert
 		Customer customer = cntrl.getCustomerById(1);
 		
-		//xx
+		//Act
 		assertNotNull(customer);
 		
 	}

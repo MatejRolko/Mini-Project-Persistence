@@ -16,10 +16,10 @@ public class TestGetOrderById {
 		//Arrange
 		OrderController cntrl = new OrderController();
 		
-		//Act
+		//Assert
 		Order order = cntrl.getOrderById(1);
 		
-		//xx
+		//Act
 		assertNotNull(order);
 	}
 

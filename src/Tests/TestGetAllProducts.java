@@ -19,10 +19,10 @@ public class TestGetAllProducts {
 		ArrayList<Product> products = new ArrayList<Product>();
 		ProductController cntrl = new ProductController();
 		
-		//Act
+		//Assert
 		products = cntrl.getAllProducts();
 		
-		//xx
+		//Act
 		assertNotNull(products);
 	}
 

@@ -40,7 +40,7 @@ public class CustomerConcreteDAO implements CustomerDAO {
 			}
 
 		} catch (SQLException e) {
-			System.out.println("error");
+			e.printStackTrace();
 		}
 		return customers;
 	}
@@ -49,7 +49,7 @@ public class CustomerConcreteDAO implements CustomerDAO {
 	public Customer read(int id) {
 		try (Connection con = Database.getInstance().getConnection()) {
 			PreparedStatement statement = con.prepareStatement("SELECT * FROM dbo.customer WHERE id=?");
-			statement.setInt(1, id);
+			statement.setInt(1, id); 
 			ResultSet rs = statement.executeQuery();
 			while (rs.next()) {
 				String name = rs.getString("name");
@@ -81,7 +81,7 @@ public class CustomerConcreteDAO implements CustomerDAO {
 			ps.setBoolean(6, customer.isBusiness());
 			ps.execute();
 		} catch (SQLException e) {
-			System.out.println("error");
+			e.printStackTrace();
 		}
 	}
 
@@ -100,7 +100,7 @@ public class CustomerConcreteDAO implements CustomerDAO {
 			ps.setInt(7, customer.getId());
 			ps.execute();
 		} catch (SQLException e) {
-			System.out.println("error");
+			e.printStackTrace();
 		}
 	}
 
@@ -112,7 +112,7 @@ public class CustomerConcreteDAO implements CustomerDAO {
 			ps.setInt(1, customer.getId());
 			ps.execute();
 		} catch (SQLException e) {
-			System.out.println("error");
+			e.printStackTrace();
 		}
 	}
 

@@ -1,6 +1,5 @@
 package persistence;
 
-import java.beans.Statement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -26,9 +25,8 @@ public class OrderConcreteDAO implements OrderDAO {
 	@Override
 	public ArrayList<Order> read() {
 		ArrayList<Order> list = new ArrayList<Order>();
-		try(Connection con = Database.getInstance().getConnection();){
+		try(Connection con = Database2.getConnection()){
 			java.sql.Statement statement = con.createStatement();
-		//	use CSC-CSD-S212_10407574
 			ResultSet rs = statement.executeQuery(""
 					+ " select * from dbo.saleOrder"); 
 			while(rs.next()) {
@@ -52,12 +50,12 @@ public class OrderConcreteDAO implements OrderDAO {
 
 	@Override
 	public Order read(int id) {
-		try(Connection con = Database.getInstance().getConnection();){
+		try(Connection con = Database2.getConnection()){
 			PreparedStatement ps = con.prepareStatement(" select * from dbo.saleOrder where id = ?");
 			ps.setInt(1, id);
 			ResultSet rs = ps.executeQuery();
 			while(rs.next()) {
-				Date date = rs.getTimestamp("date");
+				Date date = rs.getTimestamp("date");   
 				int price = rs.getInt("amount");
 				Date deliveryDate = rs.getTimestamp("deliveryDate");
 				String deliveryStatus = rs.getString("deliveryStatus");
@@ -75,17 +73,17 @@ public class OrderConcreteDAO implements OrderDAO {
 
 	@Override
 	public void create(Order order) {
-		try(Connection con = Database.getInstance().getConnection();){
-			PreparedStatement ps = con.prepareStatement(" insert into dbo.saleOrder(date, amount, deliveryDate, deliveryStatus"
+		try(Connection con = Database2.getConnection()){     
+			PreparedStatement ps = con.prepareStatement(" insert into dbo.saleOrder(date, amount, deliveryDate, deliveryStatus,"
 					+ " delivery, customer_id) values (?,?,?,?,?,?) ");
 			ps.setTimestamp(1, order.getSqlDate());
-			ps.setDouble(2,order.getPrice());
+			ps.setDouble(2,order.getPrice()); 
 			ps.setTimestamp(3, order.getSqlDeliveryDate());
 			ps.setString(4, order.getDeliveryStatus());
 			ps.setString(5, order.getDelivery());
 			ps.setInt(6,order.getCustomerId());
 			ps.execute();
-			setItems(order);
+			setItems(order);  
 		}
 		catch(Exception e) {
 			e.printStackTrace();
@@ -93,11 +91,31 @@ public class OrderConcreteDAO implements OrderDAO {
 	}
 	
 	@Override
+	public Integer getNextOrderId() {
+		Integer id = null;
+		try(Connection con = Database2.getConnection()){
+			PreparedStatement statement = con.prepareStatement(" SELECT TOP 1 id FROM dbo.saleOrder "
+					+ "ORDER BY id DESC ");
+			ResultSet rs = statement.executeQuery();
+			while(rs.next()) { 
+				id = rs.getInt("id");
+				}
+			if(id != null) return id +1;
+			else return 1;
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		return id;
+		
+	}
+	
+	@Override
 	public void setItems(Order order) {
-		try(Connection con = Database.getInstance().getConnection();){
+		try(Connection con = Database2.getConnection()){ 
 			for(SalesLineItem i:order.getProducts()) {
-				PreparedStatement ps = con.prepareStatement("insert into dbo.saleItems(amount, product_id) values("
-						+ "?,?) where saleOrder_id = ? ");
+				PreparedStatement ps = con.prepareStatement("insert into dbo.saleItems(amount, product_id"
+						+ ",saleOrder_id) values(?,?,?) ");
 				ps.setInt(1, i.getAmount());
 				ps.setInt(2, i.getProduct().getId());
 				ps.setInt(3, order.getId());  
@@ -106,7 +124,7 @@ public class OrderConcreteDAO implements OrderDAO {
 		}
 		catch(Exception e) {
 			e.printStackTrace(); 
-		}
+		}  
 	}
 
 	@Override
@@ -129,7 +147,8 @@ public class OrderConcreteDAO implements OrderDAO {
 		}
 		
 	}
-
+	
+ 
 	@Override
 	public void delete(int id) {
 		try(Connection con = Database.getInstance().getConnection();){
@@ -138,30 +157,8 @@ public class OrderConcreteDAO implements OrderDAO {
 			ps.execute();
 		}
 		catch(Exception e) {
-			e.printStackTrace();
+			e.printStackTrace(); 
 		}
 		
 	}
-
-	@Override
-	public Integer getNextOrderId() {
-		Integer id = null;
-		try(Connection con = Database.getInstance().getConnection();){
-			java.sql.Statement statement = con.createStatement();
-			ResultSet rs = statement.executeQuery(" SELECT TOP 1 id FROM dbo.saleOrder "
-					+ "ORDER BY id DESC ");
-
-			while(rs.next()) {
-				id = rs.getInt("id");
-				}
-			if(id != null) return id +1;
-			else return 1;
-		}
-		catch(Exception e) {
-			e.printStackTrace();
-		}
-		return id;
-	}
-	
-
 }
