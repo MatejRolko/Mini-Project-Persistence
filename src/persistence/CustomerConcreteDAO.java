@@ -26,7 +26,7 @@ public class CustomerConcreteDAO implements CustomerDAO {
 
 		try (Connection con = Database.getInstance().getConnection()) {
 			Statement statement = con.createStatement();
-			ResultSet rs = statement.executeQuery("SELECT name, address, zipcode, city, phone, business FROM dbo.customer");
+			ResultSet rs = statement.executeQuery("SELECT * FROM dbo.customer");
 			while (rs.next()) {
 				String name = rs.getString("name");
 				String address = rs.getString("address");
@@ -34,9 +34,11 @@ public class CustomerConcreteDAO implements CustomerDAO {
 				String city = rs.getString("city");
 				int phone = rs.getInt("phone");
 				boolean business = rs.getBoolean("business");
-				customers.add(new Customer(name, address, zipcode, city, phone, business));
+				Customer customer = new Customer(name, address, zipcode, city, phone, business);
+				customer.setId(rs.getInt("id"));
+				customers.add(customer);
 			}
-			
+
 		} catch (SQLException e) {
 			System.out.println("error");
 		}
@@ -45,31 +47,32 @@ public class CustomerConcreteDAO implements CustomerDAO {
 
 	@Override
 	public Customer read(int id) {
-		Customer result = null;
-	    try (Connection con = Database.getInstance().getConnection()) {
-	      Statement statement = con.createStatement();
-	      ResultSet rs = statement.executeQuery("SELECT name, address, zipcode, city, phone, business FROM dbo.customer");
-	      while (rs.next()) {
-	        String name = rs.getString("name");
-	        String address = rs.getString("address");
-	        int zipcode = rs.getInt("zipcode");
-	        String city = rs.getString("city");
-	        int phone = rs.getInt("phone");
-	        boolean business = rs.getBoolean("business");
-	        result = new Customer(name, address, zipcode, city, phone, business);
-
-		    return result;
-	      }
-	    } catch (SQLException e) {
-	    }
-	    return result;
+		try (Connection con = Database.getInstance().getConnection()) {
+			PreparedStatement statement = (PreparedStatement) con.createStatement();
+			ResultSet rs = statement.executeQuery("SELECT * FROM dbo.customer WHERE id=?");
+			statement.setInt(1, id);
+			while (rs.next()) {
+				String name = rs.getString("name");
+				String address = rs.getString("address");
+				int zipcode = rs.getInt("zipcode");
+				String city = rs.getString("city");
+				int phone = rs.getInt("phone");
+				boolean business = rs.getBoolean("business");
+				Customer customer = new Customer(name, address, zipcode, city, phone, business);
+				customer.setId(id);
+				return customer;
+			}
+		} catch (SQLException e) {
+		}
+		return null;
 	}
 
 	@Override
 	public void create(Customer customer) {
 		try (Connection con = Database.getInstance().getConnection()) {
-			PreparedStatement ps = con.prepareStatement("INSERT INTO dbo.customer (name, address, zipcode, city, phone, business)"
-					+ "VALUES (?,?,?,?,?,?)");
+			PreparedStatement ps = con
+					.prepareStatement("INSERT INTO dbo.customer (name, address, zipcode, city, phone, business)"
+							+ "VALUES (?,?,?,?,?,?)");
 			ps.setString(1, customer.getName());
 			ps.setString(2, customer.getAddress());
 			ps.setInt(3, customer.getZipCode());
@@ -114,6 +117,3 @@ public class CustomerConcreteDAO implements CustomerDAO {
 	}
 
 }
-
-
-
