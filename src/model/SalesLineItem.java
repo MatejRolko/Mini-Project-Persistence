@@ -5,7 +5,7 @@ public class SalesLineItem {
 	private int amount;
 	private Product product;
 	
-	public SalesLineItem(int amount, Product product) {
+	public SalesLineItem(Product product, int amount) {
 		this.amount = amount;
 		this.product = product;
 	}

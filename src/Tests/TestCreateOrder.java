@@ -9,13 +9,27 @@ import org.junit.Before;
 import org.junit.jupiter.api.Test;
 
 import controller.OrderController;
+import controller.ProductController;
+import model.Product;
+import model.SalesLineItem;
 
 class TestCreateOrder {
+	
+	@Before public static Product getProduct() {
+		ProductController cntrl = new ProductController();
+		return cntrl.findProductByName("greg");
+	}
 
 	@Test public void testOrderId() {
 	OrderController cntrl = new OrderController();
 	cntrl.createNewOrder();
-	assertNotNull(cntrl.getOrder());
+	cntrl.enterSalesLineItem(new SalesLineItem(getProduct(),20));
+	//assertNotNull(cntrl.getOrder()); 
 
+	}
+	
+	@After
+	public void after() {
+		
 	}
 }
