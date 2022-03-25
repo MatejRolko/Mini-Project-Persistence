@@ -16,7 +16,7 @@ public class TestGetCustomerById {
 		CustomerController cntrl = new CustomerController();
 		
 		//Act
-		Customer customer = cntrl.getCustomerById(2);
+		Customer customer = cntrl.getCustomerById(1);
 		
 		//xx
 		assertNotNull(customer);

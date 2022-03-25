@@ -11,6 +11,10 @@ import persistence.OrderConcreteDAO;
 public class OrderController {
 	private OrderConcreteDAO ocd;
 	private Order order;
+	
+	public Order getOrderById(int id) {
+		return ocd.read(id);
+	}
 
 	public OrderController() {
 		ocd = OrderConcreteDAO.getInstance();
