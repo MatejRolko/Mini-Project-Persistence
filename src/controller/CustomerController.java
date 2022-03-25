@@ -22,7 +22,7 @@ public class CustomerController {
 		return null;
 	}
 
-	public Customer findById(int id) {
+	public Customer getCustomerById(int id) {
 		for (Customer customer : dao.read()) {
 			if (customer.getId() == id) {
 				return customer;
