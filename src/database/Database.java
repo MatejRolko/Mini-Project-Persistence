@@ -1,11 +1,11 @@
-package persistence;
+package database;
 
 import java.sql.Connection;
 
 import com.microsoft.sqlserver.jdbc.SQLServerDataSource;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 
-public class Database2 {
+public class Database {
 	public static Connection getConnection() throws SQLServerException {
 
 		SQLServerDataSource ds = new SQLServerDataSource();

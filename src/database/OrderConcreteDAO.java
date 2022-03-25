@@ -1,4 +1,4 @@
-package persistence;
+package database;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -25,7 +25,7 @@ public class OrderConcreteDAO implements OrderDAO {
 	@Override
 	public ArrayList<Order> read() {
 		ArrayList<Order> list = new ArrayList<Order>();
-		try(Connection con = Database2.getConnection()){
+		try(Connection con = Database.getConnection()){
 			java.sql.Statement statement = con.createStatement();
 			ResultSet rs = statement.executeQuery(""
 					+ " select * from dbo.saleOrder"); 
@@ -50,7 +50,7 @@ public class OrderConcreteDAO implements OrderDAO {
 
 	@Override
 	public Order read(int id) {
-		try(Connection con = Database2.getConnection()){
+		try(Connection con = Database.getConnection()){
 			PreparedStatement ps = con.prepareStatement(" select * from dbo.saleOrder where id = ?");
 			ps.setInt(1, id);
 			ResultSet rs = ps.executeQuery();
@@ -73,7 +73,7 @@ public class OrderConcreteDAO implements OrderDAO {
 
 	@Override
 	public void create(Order order) {
-		try(Connection con = Database2.getConnection()){     
+		try(Connection con = Database.getConnection()){     
 			PreparedStatement ps = con.prepareStatement(" insert into dbo.saleOrder(date, amount, deliveryDate, deliveryStatus,"
 					+ " delivery, customer_id) values (?,?,?,?,?,?) ");
 			ps.setTimestamp(1, order.getSqlDate());
@@ -93,7 +93,7 @@ public class OrderConcreteDAO implements OrderDAO {
 	@Override
 	public Integer getNextOrderId() {
 		Integer id = null;
-		try(Connection con = Database2.getConnection()){
+		try(Connection con = Database.getConnection()){
 			PreparedStatement statement = con.prepareStatement(" SELECT TOP 1 id FROM dbo.saleOrder "
 					+ "ORDER BY id DESC ");
 			ResultSet rs = statement.executeQuery();
@@ -112,7 +112,7 @@ public class OrderConcreteDAO implements OrderDAO {
 	
 	@Override
 	public void setItems(Order order) {
-		try(Connection con = Database2.getConnection()){ 
+		try(Connection con = Database.getConnection()){ 
 			for(SalesLineItem i:order.getProducts()) {
 				PreparedStatement ps = con.prepareStatement("insert into dbo.saleItems(amount, product_id"
 						+ ",saleOrder_id) values(?,?,?) ");
@@ -129,7 +129,7 @@ public class OrderConcreteDAO implements OrderDAO {
 
 	@Override
 	public void update(Order order, int id) {
-		try (Connection con = Database.getInstance().getConnection();){
+		try (Connection con = Database.getConnection()){
 			PreparedStatement ps = con.prepareStatement("update dbo.saleOrder SET date=?, SET amount=?, SET deliveryDate=?, "
 					+ "SET deliveryStatus=?, SET delivery=?, SET customer_id=?"
 					+ "WHERE id=?");
@@ -151,7 +151,7 @@ public class OrderConcreteDAO implements OrderDAO {
  
 	@Override
 	public void delete(int id) {
-		try(Connection con = Database.getInstance().getConnection();){
+		try(Connection con = Database.getConnection()){
 			PreparedStatement ps = con.prepareStatement( " delete from dbo.saleOrder where id = ?");
 			ps.setInt(1, id);
 			ps.execute();

@@ -2,8 +2,8 @@ package controller;
 
 import java.util.ArrayList;
 
+import database.CustomerConcreteDAO;
 import model.Customer;
-import persistence.CustomerConcreteDAO;
 
 public class CustomerController {
 

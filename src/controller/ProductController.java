@@ -2,8 +2,8 @@ package controller;
 
 import java.util.ArrayList;
 
+import database.ProductConcreteDAO;
 import model.Product;
-import persistence.ProductConcreteDAO;
 
 public class ProductController {
 

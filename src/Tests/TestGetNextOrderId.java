@@ -17,7 +17,7 @@ public class TestGetNextOrderId {
 		int id = cntrl.getNextOrderId();
 		
 		//Act
-		assertEquals(3, id);
+		assertEquals(12, id);
 	}
 
 }

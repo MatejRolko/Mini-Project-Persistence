@@ -1,4 +1,4 @@
-package persistence;
+package database;
 
 import java.util.ArrayList;
 import model.Product;

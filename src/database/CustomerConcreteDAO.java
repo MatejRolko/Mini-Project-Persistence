@@ -1,4 +1,4 @@
-package persistence;
+package database;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -24,7 +24,7 @@ public class CustomerConcreteDAO implements CustomerDAO {
 	public ArrayList<Customer> read() {
 		ArrayList<Customer> customers = new ArrayList<Customer>();
 
-		try (Connection con = Database.getInstance().getConnection()) {
+		try (Connection con = Database.getConnection()) {
 			Statement statement = con.createStatement();
 			ResultSet rs = statement.executeQuery("SELECT * FROM dbo.customer");
 			while (rs.next()) {
@@ -47,7 +47,7 @@ public class CustomerConcreteDAO implements CustomerDAO {
 
 	@Override
 	public Customer read(int id) {
-		try (Connection con = Database.getInstance().getConnection()) {
+		try (Connection con = Database.getConnection()) {
 			PreparedStatement statement = con.prepareStatement("SELECT * FROM dbo.customer WHERE id=?");
 			statement.setInt(1, id); 
 			ResultSet rs = statement.executeQuery();
@@ -69,7 +69,7 @@ public class CustomerConcreteDAO implements CustomerDAO {
 
 	@Override
 	public void create(Customer customer) {
-		try (Connection con = Database.getInstance().getConnection()) {
+		try (Connection con = Database.getConnection()) {
 			PreparedStatement ps = con
 					.prepareStatement("INSERT INTO dbo.customer (name, address, zipcode, city, phone, business)"
 							+ "VALUES (?,?,?,?,?,?)");
@@ -87,7 +87,7 @@ public class CustomerConcreteDAO implements CustomerDAO {
 
 	@Override
 	public void update(Customer customer) {
-		try (Connection con = Database.getInstance().getConnection()) {
+		try (Connection con = Database.getConnection()) {
 			PreparedStatement ps = con.prepareStatement("USE CSD-CSC-S212_10407570 "
 					+ "update dbo.customer SET name=?, SET address=?, SET zipcode=?, SET city=?, SET phone=?, SET business=?"
 					+ "WHERE id=?");
@@ -106,7 +106,7 @@ public class CustomerConcreteDAO implements CustomerDAO {
 
 	@Override
 	public void delete(Customer customer) {
-		try (Connection con = Database.getInstance().getConnection()) { 
+		try (Connection con = Database.getConnection()) { 
 			PreparedStatement ps = con
 					.prepareStatement("USE CSD-CSC-S212_10407570 DELETE FROM dbo.customer WHERE id=?");
 			ps.setInt(1, customer.getId());

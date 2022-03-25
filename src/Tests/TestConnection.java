@@ -7,14 +7,23 @@ import java.sql.Connection;
 
 import org.junit.jupiter.api.Test;
 
-import persistence.Database;
+import com.microsoft.sqlserver.jdbc.SQLServerException;
+
+import database.Database;
 
 public class TestConnection {
 	
 	@Test
 	public void connectionTest() {
-		Connection con = Database.getInstance().getConnection();
-		assertNotNull(con); 
+		Connection con;
+		try {
+			con = Database.getConnection();
+			assertNotNull(con); 
+		} catch (SQLServerException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 
 }

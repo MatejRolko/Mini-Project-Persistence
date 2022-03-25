@@ -4,9 +4,9 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 
+import database.OrderConcreteDAO;
 import model.Order;
 import model.SalesLineItem;
-import persistence.OrderConcreteDAO;
 
 public class OrderController {
 	private OrderConcreteDAO ocd;

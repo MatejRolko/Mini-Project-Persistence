@@ -1,4 +1,4 @@
-package persistence;
+package database;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -21,7 +21,7 @@ public class ProductConcreteDAO implements ProductDAO {
 	public ArrayList<Product> read() {
 		ArrayList<Product> products = new ArrayList<Product>();
 
-		try (Connection con = Database2.getConnection()) {
+		try (Connection con = Database.getConnection()) {
 			PreparedStatement ps = con.prepareStatement("SELECT * FROM dbo.product");
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
@@ -46,7 +46,7 @@ public class ProductConcreteDAO implements ProductDAO {
 
 	@Override
 	public Product read(int id) {
-		try (Connection con = Database2.getConnection()) {
+		try (Connection con = Database.getConnection()) {
 			Statement statement = con.createStatement();
 			ResultSet rs = statement.executeQuery("SELECT * FROM dbo.product");
 			while (rs.next()) {
@@ -69,7 +69,7 @@ public class ProductConcreteDAO implements ProductDAO {
 
 	@Override
 	public void create(Product product) {
-		try (Connection con = Database2.getConnection()) {
+		try (Connection con = Database.getConnection()) {
 			PreparedStatement ps = con.prepareStatement(
 					"INSERT INTO dbo.product (name, purchasePrice, salesPrice, rentPrice, countryOfOrigin, minStock, stock)"
 							+ "VALUES (?,?,?,?,?,?,?)");
@@ -88,7 +88,7 @@ public class ProductConcreteDAO implements ProductDAO {
 
 	@Override
 	public void update(Product product) {
-		try (Connection con = Database2.getConnection()) {
+		try (Connection con = Database.getConnection()) {
 			PreparedStatement ps = con.prepareStatement("USE CSD-CSC-S212_10407570 "
 					+ "UPDATE dbo.product SET name=?, SET purchasePrice=?, SET salesPrice=?, SET rentPrice=?, "
 					+ "SET countryOFOrigin=?, SET minstock=?, SET stock=?" + "WHERE id=?");
@@ -108,7 +108,7 @@ public class ProductConcreteDAO implements ProductDAO {
 
 	@Override
 	public void delete(Product product) {
-		try (Connection con = Database2.getConnection()) {
+		try (Connection con = Database.getConnection()) {
 			PreparedStatement ps = con
 					.prepareStatement("USE CSD-CSC-S212_10407570 " + "DELETE FROM dbo.product WHERE id=?");
 			ps.setInt(1, product.getId());
