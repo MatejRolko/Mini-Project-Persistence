@@ -7,9 +7,9 @@ import java.sql.DriverManager;
 public class Database {
 
 	private static final String driver = "jdbc:sqlserver://hildur.ucn.dk:1433";;
-	private static final String databaseName = ";databaseName=CSC-CSD-S212_10407570";
+	private static final String databaseName = ";databaseName=CSC-CSD-S212_10407574";
 
-	private static String userName = ";user=CSC-CSD-S212_10407570";
+	private static String userName = ";user=CSC-CSD-S212_10407574";
 	private static String password = ";password=Password1!";
 	private static String encryption = ";encrypt=false;";
 
