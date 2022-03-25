@@ -23,10 +23,9 @@ class TestCustomerClasses {
         
         Customer testCustomer = new Customer(name, address, zipcode, city, phone, business);
 		
-		cntrl.createCustomer(testCustomer);
+		System.out.println(cntrl.getCustomerById(1).getName());
 		
 		
-		assertEquals(cntrl.findByName(name).getName(), testCustomer.getName());
 
 	}
 

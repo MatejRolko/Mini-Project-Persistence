@@ -23,12 +23,7 @@ public class CustomerController {
 	}
 
 	public Customer getCustomerById(int id) {
-		for (Customer customer : dao.read()) {
-			if (customer.getId() == id) {
-				return customer;
-			}
-		}
-		return null;
+		return dao.read(id);
 	}
 
 	public void createCustomer(Customer customer) {

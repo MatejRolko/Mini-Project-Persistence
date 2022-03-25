@@ -25,7 +25,7 @@ public class CustomerConcreteDAO implements CustomerDAO {
 		ArrayList<Customer> customers = new ArrayList<Customer>();
 
 		try (Connection con = Database.getInstance().getConnection()) {
-			PreparedStatement statement = (PreparedStatement) con.createStatement();
+			Statement statement = con.createStatement();
 			ResultSet rs = statement.executeQuery("SELECT * FROM dbo.customer");
 			while (rs.next()) {
 				String name = rs.getString("name");
@@ -48,9 +48,9 @@ public class CustomerConcreteDAO implements CustomerDAO {
 	@Override
 	public Customer read(int id) {
 		try (Connection con = Database.getInstance().getConnection()) {
-			PreparedStatement statement = (PreparedStatement) con.createStatement();
-			ResultSet rs = statement.executeQuery("SELECT * FROM dbo.customer WHERE id=?");
+			PreparedStatement statement = con.prepareStatement("SELECT * FROM dbo.customer WHERE id=?");
 			statement.setInt(1, id);
+			ResultSet rs = statement.executeQuery();
 			while (rs.next()) {
 				String name = rs.getString("name");
 				String address = rs.getString("address");
