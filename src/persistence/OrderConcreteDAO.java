@@ -53,8 +53,8 @@ public class OrderConcreteDAO implements OrderDAO {
 	@Override
 	public Order read(int id) {
 		try(Connection con = Database.getInstance().getConnection();){
-			PreparedStatement ps = (PreparedStatement) con.createStatement();
-			ResultSet rs = ps.executeQuery(" select * from dbo.saleOrder where id = ?");
+			PreparedStatement ps = con.prepareStatement(" select * from dbo.saleOrder where id = ?");
+			ResultSet rs = ps.executeQuery();
 			ps.setInt(1, id);
 			while(rs.next()) {
 				Date date = rs.getTimestamp("date");

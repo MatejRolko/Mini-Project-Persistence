@@ -106,7 +106,7 @@ public class CustomerConcreteDAO implements CustomerDAO {
 
 	@Override
 	public void delete(Customer customer) {
-		try (Connection con = Database.getInstance().getConnection()) {
+		try (Connection con = Database.getInstance().getConnection()) { 
 			PreparedStatement ps = con
 					.prepareStatement("USE CSD-CSC-S212_10407570 DELETE FROM dbo.customer WHERE id=?");
 			ps.setInt(1, customer.getId());
