@@ -26,8 +26,7 @@ public class CustomerConcreteDAO implements CustomerDAO {
 
 		try (Connection con = Database.getInstance().getConnection()) {
 			Statement statement = con.createStatement();
-			ResultSet rs = statement
-					.executeQuery("SELECT name, address, zipcode, city, phone, business FROM dbo.customers");
+			ResultSet rs = statement.executeQuery("SELECT name, address, zipcode, city, phone, business FROM dbo.customer");
 			while (rs.next()) {
 				String name = rs.getString("name");
 				String address = rs.getString("address");
@@ -37,6 +36,7 @@ public class CustomerConcreteDAO implements CustomerDAO {
 				boolean business = rs.getBoolean("business");
 				customers.add(new Customer(name, address, zipcode, city, phone, business));
 			}
+			
 		} catch (SQLException e) {
 			System.out.println("error");
 		}
@@ -45,11 +45,10 @@ public class CustomerConcreteDAO implements CustomerDAO {
 
 	@Override
 	public Customer read(int id) {
-
-		String query = "SELECT name, address, zipcode, city, phone, business FROM dbo.customer";
 		Customer result = null;
-	    try (Connection con = Database.getInstance().getConnection(); Statement stmt = con.createStatement()) {
-	      ResultSet rs = stmt.executeQuery(query);
+	    try (Connection con = Database.getInstance().getConnection()) {
+	      Statement statement = con.createStatement();
+	      ResultSet rs = statement.executeQuery("SELECT name, address, zipcode, city, phone, business FROM dbo.customer");
 	      while (rs.next()) {
 	        String name = rs.getString("name");
 	        String address = rs.getString("address");
@@ -58,6 +57,8 @@ public class CustomerConcreteDAO implements CustomerDAO {
 	        int phone = rs.getInt("phone");
 	        boolean business = rs.getBoolean("business");
 	        result = new Customer(name, address, zipcode, city, phone, business);
+
+		    return result;
 	      }
 	    } catch (SQLException e) {
 	    }
@@ -67,8 +68,7 @@ public class CustomerConcreteDAO implements CustomerDAO {
 	@Override
 	public void create(Customer customer) {
 		try (Connection con = Database.getInstance().getConnection()) {
-			PreparedStatement ps = con.prepareStatement("USE CSD-CSC-S212_10407570 "
-					+ "INSERT INTO dbo.customer (name, address, zipcode, city, phone, business)"
+			PreparedStatement ps = con.prepareStatement("INSERT INTO dbo.customer (name, address, zipcode, city, phone, business)"
 					+ "VALUES (?,?,?,?,?,?)");
 			ps.setString(1, customer.getName());
 			ps.setString(2, customer.getAddress());

@@ -14,7 +14,7 @@ class TestCustomerClasses {
 	@Test
 	void test() {
 		
-		String name = "Martin";
+		String name = "Peter";
         String address = "Anna A Vej";
         int zipcode = 9200;
         String city = "Aalborg";
